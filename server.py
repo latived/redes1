@@ -20,8 +20,8 @@ def start_server(host='localhost', port=12345):
             soc.bind((HOST, PORT))
             print('Socket bind complete')
         except socket.error as msg:
-            print('Bind failed. Error: ' + str(sysoc.exc_info()))
-            sysoc.exit()
+            print('Bind failed. Error: ' + str(sys.exc_info()))
+            sys.exit()
 
         soc.listen(2)
         print('Socket now listening')

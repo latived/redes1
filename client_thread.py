@@ -2,19 +2,35 @@
 
 import socket
 
-valid_commands = ["CREATE", "ADD", "REMOVE", "START", "FOCUS", "CONF", 
-        "PLAY", "SHOW", "LIST", "HELP", "EXIT", "QUIT"]
+# TODO: find a better name to module 'Command'
+from Command import VALID_COMMANDS 
+from Command import Command 
 
 # Parse command and return a instance of the desired command
 def parse_cmd(cmd_full):
-    # Split by spaces to get COMMAND <option(s)>=<value>
+    # Split by spaces to get COMMAND [, CMD] <option(s)>[,=<value>]
     cmd = cmd_full.split(' ')
 
-    if cmd[0] not in valid_commands:
-        msg = "Invalid command!"
-        raise SyntaxError(msg)
-    
-    return getattr(Command, cmd[0], cmd[1:])
+    # Check length of command + options
+    # All defined commands have at least one option,
+    # except for QUIT and HELP (not implemented)
+    # TODO: analyse QUIT flow control here
+    if len(cmd) < 2: 
+        raise SyntaxError("Incomplete or wrong command.")
+
+    # Only command with two consecutives keywords 
+    if cmd[0] == "CONF" and cmd[1] == "PLAY":
+        if len(cmd[2:]):
+            return getattr(Command, '_'.join([cmd[0].lower(), 
+                cmd[1].lower()]))(cmd[2:])
+        else:
+            raise SyntaxError("Missing options to command '{}'."
+                .format(cmd[:2]))
+    elif cmd[0] not in VALID_COMMANDS:
+        msg = "Invalid command '{}'."
+        raise SyntaxError(msg.format(cmd[0]))
+
+    return getattr(Command, cmd[0].lower())(cmd[1:])
 
 def client_thread(conn, host, port, MAX_BUFFER_SIZE = 4096):
     with conn:
@@ -24,8 +40,17 @@ def client_thread(conn, host, port, MAX_BUFFER_SIZE = 4096):
             command_clean = command.decode("utf8").rstrip()
 
             # Parse command
-            msg_return = parse_cmd(command_clean).encode("utf8")
-            conn.sendall(msg_return)
-        
+            try:
+                out_msg = parse_cmd(command_clean)
+                conn.sendall(out_msg.encode("utf8"))
+            except SyntaxError as e:
+                print(e.msg)
+                out_msg = 'processing command... ' + e.msg
+                conn.sendall(out_msg.encode("utf8"))
+            except:
+                out_msg = 'unknown error...'
+                print(out_msg)
+                conn.sendall(out_msg.encode("utf8"))
+
         print("Connection " + host + ":" + port + " ended")
 

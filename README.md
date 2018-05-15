@@ -108,7 +108,7 @@ protocolo explícito+implícito (considerando jogo iniciado)
                  pode estar conectado (padrão é max_games=2)
                  - username=<new_username> (padrão player_<id>, tal que <id> é
                    definido pela ordem de conexão com servidor/jogo)
-            - HELP
+            - HELP [future]
             - EXIT <game_id>
             - QUIT
                 

@@ -8,14 +8,14 @@ def main(host='localhost', port=12345):
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as soc:
         soc.connect((HOST, PORT))
-        cmd_input = ""
+        
+        cmd_input = input("COMMAND?\n")
         while cmd_input != "QUIT":
-            cmd_input = input("COMMAND?\n")
             soc.sendall(cmd_input.encode("utf8"))
             result_bytes = soc.recv(4096)
             result_string = result_bytes.decode("utf8")
-
             print("ANSWER: {}".format(result_string))
+            cmd_input = input("COMMAND?\n")
 
         print("Quiting game...\n")
 
