@@ -72,19 +72,19 @@ vejamos... jogo de xadrez entre 2 apenas, mas pode ter suporte pra equipe (2x2)
 
 protocolo explícito+implícito (considerando jogo iniciado)
     - explícito no início do jogo (antes da partida): 
-        - criador da sala:
+        - criador da sala
             - CREATE <type>, onde _<type>_ indica o tipo do jogo (1x1, único; ou 2x2, equipe [pode ser abreviado: 1 ou 2])
                 - tal comando retorna um ID para o jogo (game_id)
             - ADD <player_id> <team>=[creator,other]
-            - REMOVE <player_id>
-            - START <game_id>
+            - REMOVE <player_id> [future]
+            - START <game_id> 
                 - movimentos são implícios, exceto para trocar de partida on the fly 
                 (isso nao faz o jogador sair da partida, mas apenas troca o
                 foco)
                 - FOCUS <game_id> troca o foco da partida tal para aquela com
-                  <game_id>
+                  <game_id> [future]
 
-             - CONF PLAY <game_id> <option>=<value>
+             - CONF PLAY <game_id> <option>=<value> [future]
                 - <game_id> é o id da partida criada 
                 - <option> pode ser
                     - time_move=<n>, onde <n> é em segundos (60 até 600, 1 a 10
@@ -94,22 +94,22 @@ protocolo explícito+implícito (considerando jogo iniciado)
                       começar ou não o jogo
                     - team_name=<string>
         - qualquer jogador: 
-            - PLAY <game_id> para se conectar à sala da partida
+            - PLAY <game_id> para se conectar à sala da partida 
             - SHOW <game_id> para mostrar o tabuleiro da partida (que está
-              conectada)
-            - LIST <game>
+              conectada) [future?]
+            - LIST <game> [future]
                 - my_games, pra listar os jogos conectados
                 - all_games, para listar jogos criados
                 - open_games, para listar jogos disponíveis
                 - closed_games, para listar jogos terminados (e possivelmente
                   visualizar movimentos feitos na partida)
-            - CONF <option>=<value>, onde temos
+            - CONF <option>=<value>, onde temos [future]
                  - max_games=<n>, onde o jogador configura o total de jogos 
                  pode estar conectado (padrão é max_games=2)
                  - username=<new_username> (padrão player_<id>, tal que <id> é
                    definido pela ordem de conexão com servidor/jogo)
             - HELP [future]
-            - EXIT <game_id>
+            - EXIT <game_id> [pode ser 1-0/0-1 pra entregar o jogo msm?]
             - QUIT
                 
         - 

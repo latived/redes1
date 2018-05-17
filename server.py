@@ -32,7 +32,8 @@ def start_server(host='localhost', port=12345):
             print('Accepting connection from ' + host + ':' + port)
 
             try:
-                Thread(target=client_thread, args=(conn, host, port)).start()
+                Thread(target=client_thread, 
+                        args=(conn, host, port)).start()
             except:
                 print("Terrible error!")
                 traceback.print_exc()
@@ -40,6 +41,3 @@ def start_server(host='localhost', port=12345):
 if __name__ == '__main__':
     start_server()
             
-
-                
-
