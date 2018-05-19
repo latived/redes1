@@ -20,7 +20,7 @@ class GameResources:
         Game.all_games.append(game)
         cls.add_player(game.game_id, owner_id, 'white')
         PlayerResources.add_game(owner_id, game.game_id, True)
-
+        
         return game.game_id 
 
     @classmethod
@@ -35,7 +35,6 @@ class GameResources:
     def add_player(cls, game_id, player_id, player_team):
         # TODO: see: if game is not created, what to do?
         game = cls.get_game(game_id)
-
         if not game:
             raise ValueError("Game '{}' not exists."
                     .format(game_id))
@@ -55,6 +54,9 @@ class GameResources:
             else:
                 game.players.append(player)
 
+            print(Game.all_games)
+            print([game.teams for game in Game.all_games])
+    
             # Check if player_team is valid
             if player_team in game.teams.keys():
                 # Check if team is full 
@@ -157,12 +159,13 @@ class PlayerResources:
 
         player_id = cls.get_new_id()
         player_name = "player_" + str(player_id)
-        Player.all_players.append(
-                Player(player_id,
+        
+        player = Player(player_id,
                     player_name, 
                     host, 
                     port)
-                )
+               
+        Player.all_players.append(player)
 
         return player_id
 

@@ -111,5 +111,6 @@ def client_thread(conn, host, port, MAX_BUFFER_SIZE = 4096):
                     traceback.print_exc()
                     conn.sendall(b'unknown error.')
 
+        # TODO: remove player from games
         print("Connection {}:{} ended".format(host, port))
 
