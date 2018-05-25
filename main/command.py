@@ -1,5 +1,5 @@
 
-from utils import GameResources, PlayerResources
+from .utils import GameResources, PlayerResources
 
 class Command:
 
@@ -23,7 +23,7 @@ class Command:
     board_bye = False
     
     def create(options, owner_id):
-        print("You are inside CREATE game function!")
+        print("You are inside CREATE main function!")
         print("Options given: {}".format(options))
         
         if len(options) != 1:
@@ -45,12 +45,12 @@ class Command:
         return "created game_{} sucessfuly.".format(game_id)
 
     def play(options, player_id):
-        print("You, player_{}, are inside PLAY game function!"
+        print("You, player_{}, are inside PLAY main function!"
                 .format(player_id))
         print("Options given: {}".format(options))
         # TODO: add needed exceptions
         game_id = int(options[0])
-        # TODO: add player to game
+        # TODO: add player to main
         GameResources.add_player(game_id, player_id, 'black')
         PlayerResources.add_game(player_id, game_id, False)
 
@@ -58,12 +58,12 @@ class Command:
 
 
     def start(options, player_id):
-        print("You, player_{}, are inside START game function!"
+        print("You, player_{}, are inside START main function!"
                 .format(player_id))
         print("Options given: {}".format(options))
         # TODO: add needed exceptions
         game_id = int(options[0])
-        # TODO: init game's board
+        # TODO: init main's board
         # TODO: test print board
         # TODO: change input command context
 
@@ -74,7 +74,7 @@ class Command:
 
     # NOT IMPLEMENTED
     def conf_play(options, owner_id):
-        print("You, player_{}, are inside CONF PLAY game function!"
+        print("You, player_{}, are inside CONF PLAY main function!"
                 .format(owner_id))
         print("Options given: {}".format(options))
         # TODO: check options

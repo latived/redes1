@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 from threading import Thread
-from client_thread import client_thread
+from .client_thread import client_thread
 
 import socket
 import sys
 import traceback
+
 
 def start_server(host='localhost', port=12345):
 
@@ -38,6 +39,6 @@ def start_server(host='localhost', port=12345):
                 print("Terrible error!")
                 traceback.print_exc()
 
+
 if __name__ == '__main__':
     start_server()
-            

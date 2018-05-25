@@ -1,10 +1,11 @@
 import os
 
-from game import Game
-from player import Player
+from .game import Game
+from .player import Player
 
 GAMES_PATH = 'games/'
 PLAYERS_PATH = 'players/'
+
 
 class GameResources:
 
@@ -33,13 +34,13 @@ class GameResources:
 
     @classmethod
     def add_player(cls, game_id, player_id, player_team):
-        # TODO: see: if game is not created, what to do?
+        # TODO: see: if main is not created, what to do?
         game = cls.get_game(game_id)
         if not game:
             raise ValueError("Game '{}' not exists."
                     .format(game_id))
 
-        # Check if there are already enough players in game
+        # Check if there are already enough players in main
         if ((len(game.players) < 4 and game.game_type == '2x2')
                 or (len(game.players) < 2 and game.game_type == '1x1')):
             player = PlayerResources.get_player(player_id)
@@ -49,7 +50,7 @@ class GameResources:
                 raise ValueError("Player {} not exists."
                         .format(player_id))
             elif player in game.players:
-                raise ValueError("Player {} already in game."
+                raise ValueError("Player {} already in main."
                         .format(player_id))
             else:
                 game.players.append(player)
@@ -71,7 +72,7 @@ class GameResources:
                 raise ValueError("Team '{}' doesn't exists."
                         .format(player_team))
         else:
-            raise ValueError("Can't add more players: game {} already full."
+            raise ValueError("Can't add more players: main {} already full."
                     .format(game.game_id))
 
 

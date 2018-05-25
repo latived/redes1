@@ -5,7 +5,7 @@ class Player:
 
     def __init__(self, player_id, name, host, port):
         self.my_games = []
-        self.actual_game = None   # No game yet 
+        self.actual_game = None   # No main yet
         self.playing_games = []
         self.player_id = player_id
         self.name = name

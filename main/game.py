@@ -46,7 +46,7 @@ class Game:
 
         out = """[OwnerID '{}']\n[Event '{}']\n[Site '{}']\n[Date '{}']\n[White '{}']\n[Black '{}']\n{}"""
 
-        # TODO: add method to check game integrity (fields with OK
+        # TODO: add method to check main integrity (fields with OK
         # values)
         if (len(self.teams['white']) == 0 or
                 len(self.teams['black']) == 0):

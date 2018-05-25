@@ -54,7 +54,7 @@ def main(host='localhost', port=12345):
                             .format('white', '.'))
 
 
-        print("Quiting game...\n")
+        print("Quiting main...\n")
 
 
 if __name__ == '__main__':

@@ -4,8 +4,8 @@ import socket
 import traceback
 
 # TODO: find a better name to module 'Command'
-from command import Command, CommandBoard
-from utils import PlayerResources
+from .command import Command, CommandBoard
+from .utils import PlayerResources
 
 # Parse command and return a instance of the desired command
 def parse_command(cmd_full, player_id):

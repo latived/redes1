@@ -1,3 +1,0 @@
-
-class Board:
-    # and me?
